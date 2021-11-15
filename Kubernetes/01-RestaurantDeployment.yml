@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurant
+spec:
+  selector:
+    matchLabels:
+      app: restaurant
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: restaurant
+    spec:
+      containers:
+      - name: restaurant
+        image: estebanlamanna/test_netcore_redis_restaurant:v1
+        ports:
+        - containerPort: 80
+        env: 
+        - name: MI_VARIABLE_ENTORNO
+          value: "variable Seteada por config"          
+        # readinessProbe:
+          # httpGet:
+            # path: /
+            # port: 80
+          # initialDelaySeconds: 5
+          # periodSeconds: 10      
+        # livenessProbe:
+          # tcpSocket:        
+            # port: 80
+          # initialDelaySeconds: 15
+          # periodSeconds: 20

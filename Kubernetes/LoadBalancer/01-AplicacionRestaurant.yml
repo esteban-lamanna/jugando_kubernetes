@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurant
+spec:
+  selector:
+    matchLabels:
+      app: restaurant
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: restaurant
+    spec:
+      containers:
+      - name: restaurant
+        image: estebanlamanna/test_netcore_redis_restaurant:v3
+        ports:
+        - containerPort: 80
+        env: 
+        - name: MI_VARIABLE_ENTORNO
+          value: "variable Seteada por config"    
+        - name: ConnectionStrings__sqlServer
+          valueFrom: 
+            secretKeyRef: 
+                name: sql-server-connectionstring
+                key: sql-server-connectionstring

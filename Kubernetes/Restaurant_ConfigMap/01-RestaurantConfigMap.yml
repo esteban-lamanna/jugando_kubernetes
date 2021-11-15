@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: restaurant-config
+data:
+  Test__Child1: "child1 from config map"
+  ConnectionStrings__sqlServer: "Connection from config map"
